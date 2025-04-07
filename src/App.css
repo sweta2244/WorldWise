@@ -1,0 +1,110 @@
+body{
+  margin:.3rem;
+  font-family: Manrope,sans-serif;
+}
+h1{
+  font-size: 50px;
+  color:white;
+}
+p{
+  font-size: 20px;
+}
+.main-div{
+  padding:20px 20px;
+}
+
+/* navbar */
+.navigation{
+  position:absolute;
+  display:flex;
+  justify-content: space-between;
+  height:fit-content;
+  align-items: center;
+  width:90%;
+  padding:30px;
+}
+.pricing-product{
+  display:flex;
+  align-items: center;
+  gap:40px;
+}
+.pricing,.product{
+  color:white;
+  text-decoration: none;
+  font-weight:600;
+}
+.login{
+  font-weight:600;
+  text-decoration: none;
+  color:black;
+  background-color: #00c46a;
+  padding:10px 15px;
+  border-radius: 5px;
+  color:#2d3439;
+
+}
+
+/* homepage */
+.homepage{
+  background-image: linear-gradient(rgba(36,42,46,.8),rgba(36,42,46,.8)),url("/bg.jpg");
+  background-position: center;
+  background-size: cover;
+  height:calc(100vh - 11.9rem);
+  padding-top: 140px;
+  text-align: center;
+  line-height: 33px;
+}
+
+.homepage p{
+  margin: 40px;
+  color:#aaa;
+}
+
+/* pricing-section/product-section */
+.pricing-section,.product-section{
+  display:flex;
+  align-items: center;
+  gap:50px;
+  padding-top: 100px;
+  background-color: #2d3439;
+  height:calc(100vh - 8rem);
+  padding-left:200px;
+  padding-right:200px;
+}
+.pricing-description h1,.product-description h1{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.pricing-section p,.product-section p{
+  color:white;
+}
+
+
+/* Login */
+.login-section{
+  background-color: #2d3439;
+  height:calc(100vh - 3.1rem);
+  /* padding-top: 50px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-section input{
+  display: block;
+  margin-top: 10px;
+  width:400px;
+  height:25px;
+  border-radius: 5px;
+  border-style: none;
+  margin-bottom: 20px;
+  padding:5px;
+}
+.login-form{
+  background-color: #42484d;
+  padding:20px;
+  border-radius: 10px;
+}
+.login-form label{
+  font-size: 20px;
+  color: white;
+}
