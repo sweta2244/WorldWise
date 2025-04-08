@@ -108,3 +108,19 @@ p{
   font-size: 20px;
   color: white;
 }
+
+/* Cities-section */
+.cities-section{
+  display:flex;
+}
+
+/* Marked City*/
+.individual-markedcity{
+  margin-top: 50px;
+}
+.btn{
+  border-radius: 50%;
+  background-color: #2d3439;
+  border-style:none;
+  color:white;
+}
