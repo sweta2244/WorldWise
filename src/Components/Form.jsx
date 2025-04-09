@@ -7,28 +7,29 @@ export default function Form() {
     const {currentSelection,dispatch}=useWorldWise();
     const navigate=useNavigate();
     const today = new Date().toISOString().split('T')[0];
-    const [time,setTime]=useState();
+    const [date,setDate]=useState(today);
     const [note,setNote]=useState();
   return (
-    <div>
-        <Link to="/">
+    <div className="form-markedcity">
+        <Link to="/" className="logo-section">
             <img src={Logo} alt="Logo" height="52px"/>
         </Link>
-        <button  onClick={()=>{navigate("/");dispatch({type:"logout"})}}>LOGOUT</button>
+        <button  onClick={()=>{navigate("/");dispatch({type:"logout"})}} className="logout">LOGOUT</button>
        
-        {currentSelection.city==="" && <p>👋 Add your first city by clicking on a city on the map</p>}
-        {currentSelection.city!=="" && <form>
-            <label>City name</label>
-            <input type="text" name="city" value={currentSelection.city}/>
-            <label>When did you go to {currentSelection.city}?</label>
-            <input type="date" name="date" value={today} onChange={(e)=>setTime(e.target.value)}/>
-            <label>Notes about your trip to O Bolo</label>
-            <textarea rows={2} onChange={(e)=>setNote(e.target.value)}></textarea>
-            <div>
-                <button onClick={(e)=>{e.preventDefault();dispatch({type:"add clicked",date:time,note:note});dispatch({type:"set_location",currentSelection:currentSelection});navigate("/cities")}}>Add</button>
-                <button onClick={()=>window.history.back()}>← BACK</button>
-            </div>
-        </form>}
+        <div className="city-countries">
+            {currentSelection.city!=="" && <form className="form" onSubmit={(e)=>{e.preventDefault();dispatch({type:"set_location",note:note,date:date});navigate("/cities");}}>
+                <label>City name</label>
+                <input type="text" name="city" value={currentSelection.city}/>
+                <label>When did you go to {currentSelection.city}?</label>
+                <input type="date" name="date" value={date} onChange={(e)=>setDate(e.target.value)}/>
+                <label>Notes about your trip to {currentSelection.city}</label>
+                <textarea rows="10" onChange={(e)=>setNote(e.target.value)}/>
+                <div className="btn-section">
+                    <button type="submit" className="login">Add</button>
+                    <button className="login btn-back" type="button" onClick={()=>navigate("/cities")}>← BACK</button>
+                </div>
+            </form>}
+        </div>
     </div>
   )
 }

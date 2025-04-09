@@ -14,7 +14,7 @@ export default function Login() {
           className="login-form"
           onSubmit={(e) => {
             e.preventDefault();
-            (email==="jack@example.com" && password === "sweta")?(navigate("/form"), dispatch({type:"login success"})):(alert("Invalid credentials!"))
+            (email==="jack@example.com" && password === "sweta")?(navigate("/cities"), dispatch({type:"login success"})):(alert("Invalid credentials!"))
           }}
         >
           <label>Email address</label>

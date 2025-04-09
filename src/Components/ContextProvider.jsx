@@ -4,19 +4,12 @@ const initialState = {
   email: null,
   password: null,
   login: false,
-  locationInfo:[{
-    city:"",
-    country:"",
-    position:null,
-    date:"",
-    note:""
-  }],
+  locationInfo:[],
   currentSelection: {
     city:"",
     country:"",
     position:null,
-    date:"",
-    note:"",
+    countryCode:"",
   },
 };
 function reducer(state, action) {
@@ -39,30 +32,26 @@ function reducer(state, action) {
     case "set_location":
       return{
         ...state,
-        locationInfo:[...state.locationInfo,action.currentSelection],
+        locationInfo:[...state.locationInfo,{city:state.currentSelection.city,country:state.currentSelection.country,position:state.currentSelection.position,countryCode:state.currentSelection.countryCode,note:action.note,date:action.date,},],
+        currentSelection:{city:"",country:"",position:null,countryCode:"",},
       };
     case "form trigger when clicked":
       return{
         ...state,
-        currentSelection:{...state.currentSelection,city:action.city,country:action.country,position:action.position},
-      }
-    case "add clicked":
-      return{
-        ...state,
-        currentSelection:{...state.currentSelection,date:action.date,note:action.note}
-      }
+        currentSelection:{...state.currentSelection,city:action.city,country:action.country,position:action.position,countryCode:action.code},
+      };
     case "remove":
       return{
         ...state,
         locationInfo:state.locationInfo.map((info,idx)=>idx!==action.index && info),
-      }
+      };
     case "logout":
       return{
         ...state,
         email:null,
         password:null,
         login:false,
-      }
+      };
   }
 }
 export default function ContextProvider({ children }) {

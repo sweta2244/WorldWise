@@ -17,20 +17,20 @@ function LocationMarker() {
     click: async (e) => {
       const { lat, lng } = e.latlng;
       try {
-        const res = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
-        );
-        const data = await res.json();
-        const city =
-          data.address.city || data.address.town || data.address.village || "";
-        const country = data.address.country || "";
+
+        const res=await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`);
+        const data=await res.json();
+        const city=data.city|| data.locality||"";
+        const country=data.countryName;
+        const code=data.countryCode;
         dispatch({
           type: "form trigger when clicked",
           city: city,
           country: country,
           position: e.latlng,
+          code : code,
         });
-        navigate("/form")
+        navigate(`/form?lat=${lat}&lng=${lng}`)
         console.log(city);
       } catch (err) {
         console.error("Failed to reverse geocode:", err);
@@ -38,9 +38,9 @@ function LocationMarker() {
     },
   });
 
-  return locationInfo[0].position === null ? null : (
+  return locationInfo.length>0?(
     <>
-      {locationInfo.map((item, index) => (
+      {locationInfo.map((item, index) => item.position? (
         <Marker position={item.position} key={index}>
           <Popup>
             You are here: <br />
@@ -50,9 +50,9 @@ function LocationMarker() {
             {item?.country && `Country: ${item.country}`}
           </Popup>
         </Marker>
-      ))}
+      ):null)}
     </>
-  );
+  ):null;
 }
 
 export default function Map() {
@@ -61,7 +61,7 @@ export default function Map() {
       center={{ lat: 51.505, lng: -0.09 }}
       zoom={13}
       scrollWheelZoom={false}
-      style={{ height: "100vh", width: "50%" }}
+      className="map-container"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
