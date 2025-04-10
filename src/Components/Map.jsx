@@ -8,59 +8,66 @@ import {
 } from "react-leaflet";
 import { useWorldWise } from "./useWorldWise";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function LocationMarker() {
   const { dispatch, locationInfo } = useWorldWise();
-  const navigate=useNavigate();
 
+  const navigate = useNavigate();
   useMapEvents({
     click: async (e) => {
       const { lat, lng } = e.latlng;
       try {
+        const res = await fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+        );
+        const data = await res.json();
+        const city = data.city || data.locality || "";
+        const country = data.countryName;
+        const code = data.countryCode;
 
-        const res=await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`);
-        const data=await res.json();
-        const city=data.city|| data.locality||"";
-        const country=data.countryName;
-        const code=data.countryCode;
         dispatch({
           type: "form trigger when clicked",
           city: city,
           country: country,
           position: e.latlng,
-          code : code,
+          code: code,
+          lat: lat,
+          lng: lng,
         });
-        navigate(`/form?lat=${lat}&lng=${lng}`)
-        console.log(city);
+        navigate(`/form?lat=${lat}&lng=${lng}`);
       } catch (err) {
         console.error("Failed to reverse geocode:", err);
       }
     },
   });
 
-  return locationInfo.length>0?(
+  return locationInfo.length > 0 ? (
     <>
-      {locationInfo.map((item, index) => item.position? (
-        <Marker position={item.position} key={index}>
-          <Popup>
-            You are here: <br />
-            Lat: {item.position?.lat.toFixed(4)}, Lng:{" "}
-            {item.position?.lng.toFixed(4)} <br />
-            {item?.city && `City: ${item.city}`} <br />
-            {item?.country && `Country: ${item.country}`}
-          </Popup>
-        </Marker>
-      ):null)}
+      {locationInfo.map((item, index) =>
+        item?.position ? (
+          <Marker position={item?.position} key={index}>
+            <Popup>
+              You are here: <br />
+              Lat: {item?.position?.lat.toFixed(4)}, Lng:{" "}
+              {item?.position?.lng.toFixed(4)} <br />
+              {item?.city && `City: ${item.city}`} <br />
+              {item?.country && `Country: ${item.country}`}
+            </Popup>
+          </Marker>
+        ) : null
+      )}
     </>
-  ):null;
+  ) : null;
 }
 
-export default function Map() {
+export default function Map({ myLat = 51.505, myLng = -0.09 }) {
   return (
     <MapContainer
-      center={{ lat: 51.505, lng: -0.09 }}
+      key={`${myLat}-${myLng}`} // Forces re-render on location change
+      center={[myLat, myLng]}
       zoom={13}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       className="map-container"
     >
       <TileLayer

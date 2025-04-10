@@ -160,6 +160,7 @@ p{
 }
 .individual-markedcity{
   margin-top: 25px;
+  border-style: none;
   border-left:4px solid #00c46a;
   border-radius: 6px;
   padding:10px;
@@ -204,4 +205,22 @@ p{
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+}
+
+.description{
+  color:white;
+  background-color: #42484d;
+  margin-top: 40px;
+  width:70%;
+  padding:20px;
+  border-radius: 10px;
+}
+.description h4{
+  color:#aaa;
+  margin: 0;
+  font-size: 13px;
+}
+.description p{
+  margin-top: 5px;
+  font-size: 18px;
 }

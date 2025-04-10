@@ -43,7 +43,7 @@ function reducer(state, action) {
     case "remove":
       return{
         ...state,
-        locationInfo:state.locationInfo.map((info,idx)=>idx!==action.index && info),
+        locationInfo:state.locationInfo.filter((_,idx)=>idx!==action.index),
       };
     case "logout":
       return{
