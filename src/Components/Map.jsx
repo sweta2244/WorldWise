@@ -6,9 +6,8 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
-import { useWorldWise } from "./useWorldWise";
+import { useWorldWise } from "../contexts/useWorldWise";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 function LocationMarker() {
   const { dispatch, locationInfo } = useWorldWise();

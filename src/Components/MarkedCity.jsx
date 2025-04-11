@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useWorldWise } from "./useWorldWise";
+import { useWorldWise } from "../contexts/useWorldWise";
 import Logo from "/logo.png";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
@@ -34,13 +34,19 @@ export default function MarkedCity() {
       <div className="city-countries">
         <div>
           <button
-            onClick={() => {setCityEnable(true);setDescription(false);}}
+            onClick={() => {
+              setCityEnable(true);
+              setDescription(false);
+            }}
             className={`citiesbtn ${cityEnable ? "active" : ""}`}
           >
             Cities
           </button>
           <button
-            onClick={() => {setCityEnable(false);setDescription(false);}}
+            onClick={() => {
+              setCityEnable(false);
+              setDescription(false);
+            }}
             className={`citiesbtn ${cityEnable ? "" : "active"}`}
           >
             Countries
@@ -56,36 +62,45 @@ export default function MarkedCity() {
             {cityEnable &&
               locationInfo.length !== 0 &&
               locationInfo.map((item, index) => (
-                  <div style={{position:"relative"}}>
-                    <div key={index} className="individual-markedcity" onClick={() => {
+                <div style={{ position: "relative" }}>
+                  <div
+                    key={index}
+                    className="individual-markedcity"
+                    onClick={() => {
                       navigate(
                         `/cities?lat=${item.position.lat}&lng=${item.position.lng}`
                       );
                       setDescription(true);
-                    }}>
-                      <div>
-                        {item?.countryCode && (
-                          <span style={{ marginRight: "20px" }}>
-                            {item.countryCode}
-                          </span>
-                        )}{" "}
-                        {item?.city && <span>{item.city}</span>}{" "}
-                      </div>
-                      {item?.date && (
+                    }}
+                  >
+                    <div>
+                      {item?.countryCode && (
                         <span style={{ marginRight: "20px" }}>
-                          ({item.date})
+                          {item.countryCode}
                         </span>
                       )}{" "}
+                      {item?.city && <span>{item.city}</span>}{" "}
                     </div>
-                    {item?.city && (
-                      <button style={{position:"absolute",right:"5px",top:"12px"}}
-                        onClick={() => {dispatch({ type: "remove", index: index });}}
-                        className="btn"
-                      >
-                        &times;
-                      </button>
-                    )}
+                    {item?.date && (
+                      <span style={{ marginRight: "20px" }}>({item.date})</span>
+                    )}{" "}
                   </div>
+                  {item?.city && (
+                    <button
+                      style={{
+                        position: "absolute",
+                        right: "5px",
+                        top: "12px",
+                      }}
+                      onClick={() => {
+                        dispatch({ type: "remove", index: index });
+                      }}
+                      className="btn"
+                    >
+                      &times;
+                    </button>
+                  )}
+                </div>
               ))}
           </div>
         )}
