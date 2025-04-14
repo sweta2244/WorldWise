@@ -5,6 +5,7 @@ import {
   Marker,
   Popup,
   useMapEvents,
+  useMap,
 } from "react-leaflet";
 import { useWorldWise } from "../contexts/useWorldWise";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +66,7 @@ export default function Map({ myLat = 51.505, myLng = -0.09 }) {
     <MapContainer
       key={`${myLat}-${myLng}`} // Forces re-render on location change
       center={[myLat, myLng]}
-      zoom={13}
+      zoom={43}
       scrollWheelZoom={true}
       className="map-container"
     >
@@ -73,7 +74,15 @@ export default function Map({ myLat = 51.505, myLng = -0.09 }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <ChangeCenter position={{lat:myLat,lng:myLng}}/>
       <LocationMarker />
     </MapContainer>
   );
+}
+
+function ChangeCenter({position}){
+  const map=useMap();
+  map.setView(position);
+  console.log(position);
+  return null;
 }

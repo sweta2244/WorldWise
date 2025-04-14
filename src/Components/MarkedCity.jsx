@@ -62,9 +62,8 @@ export default function MarkedCity() {
             {cityEnable &&
               locationInfo.length !== 0 &&
               locationInfo.map((item, index) => (
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative" }} key={index}>
                   <div
-                    key={index}
                     className="individual-markedcity"
                     onClick={() => {
                       navigate(
@@ -112,7 +111,7 @@ export default function MarkedCity() {
             </p>
             <h4> YOU WENT TO {selectedCity?.city} ON</h4>
             <p>{selectedCity?.date}</p>
-            {selectedCity.note && <p>NOTE:{selectedCity?.note}</p>}
+            {selectedCity?.note && <p>NOTE:{selectedCity?.note}</p>}
             <button
               className="login btn-back"
               onClick={() => {
