@@ -66,7 +66,7 @@ export default function Map({ myLat = 51.505, myLng = -0.09 }) {
     <MapContainer
       key={`${myLat}-${myLng}`} // Forces re-render on location change
       center={[myLat, myLng]}
-      zoom={43}
+      zoom={13}
       scrollWheelZoom={true}
       className="map-container"
     >
