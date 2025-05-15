@@ -71,8 +71,8 @@ function reducer(state, action) {
     case "logout":
       return {
         ...state,
-        email: null,
-        password: null,
+        // email: null,
+        // password: null,
         login: false,
       };
   }
