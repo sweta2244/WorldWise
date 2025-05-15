@@ -1,12 +1,37 @@
-# React + Vite
+# 🗺️ WorldWise
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**WorldWise** is a map-based React application that allows users to **select a city** and be **redirected to its location on an interactive map**. The app integrates several advanced React features and uses a third-party **map API** to display geographic data.
 
-Currently, two official plugins are available:
+🌍 **Live Demo**: [world-wise-taupe.vercel.app](https://world-wise-taupe.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📌 Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 📍 Displays real-time location using **Geolocation**
+- 🗂️ Manages complex state with `useReducer`
+- 🔁 Shares data globally with `useContext`
+- 🔄 Navigation and URL sync via `useLocation`
+- 🗺️ Interactive map with clickable city markers
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: ReactJS
+- **React Hooks**: `useGeolocation`, `useLocation`, `useReducer`, `useContext`
+- **Map Integration**: [Insert Map API name here — e.g., Leaflet, Mapbox, Google Maps]
+- **Routing**: React Router
+- **Deployment**: Vercel
+
+---
+
+## 🚧 How It Works
+
+1. On load, user's geolocation is fetched (if permission is granted).
+2. Users can search or select a city from the interface.
+3. The app updates URL and state using `useReducer` and `useLocation`.
+4. The selected city's coordinates are shown on the map.
+5. State and logic are shared across components using `useContext`.
+
+
