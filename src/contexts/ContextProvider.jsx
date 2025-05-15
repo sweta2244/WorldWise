@@ -1,8 +1,8 @@
 import { useReducer } from "react";
 import { MyContext } from "./useWorldWise";
 const initialState = {
-  email: null,
-  password: null,
+  email: "jack@example.com",
+  password: "sweta",
   login: false,
   locationInfo: [],
   currentSelection: {

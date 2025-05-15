@@ -23,6 +23,7 @@ export default function Login() {
           <input
             type="email"
             name="email"
+            value={email}
             onChange={(e) =>
               dispatch({ type: "login email", data: e.target.value })
             }
@@ -31,6 +32,7 @@ export default function Login() {
           <input
             type="password"
             name="password"
+            value={password}
             onChange={(e) =>
               dispatch({ type: "login password", data: e.target.value })
             }
