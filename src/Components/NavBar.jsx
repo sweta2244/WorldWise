@@ -2,10 +2,13 @@ import { Link, useLocation } from "react-router-dom";
 import Logo from "/logo.png";
 import Button from "./Button";
 import { useWorldWise } from "../contexts/useWorldWise";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 export default function NavBar() {
   const { login } = useWorldWise();
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen((prev) => !prev);
   useEffect(() => {
     console.log(location);
   }, [location]);
@@ -14,24 +17,20 @@ export default function NavBar() {
       <Link to="/">
         <img src={Logo} alt="Logo" height="52px" />
       </Link>
-      <div className="pricing-product">
+      <button className="hamburger" onClick={toggleMenu}>
+        ☰
+      </button>
+      <div className={`nav-links ${isOpen ? "open" : ""}`}>
         <Link
-          to="/pricing"
-          className="pricing"
+          to="/budgeting"
+          className={`pricing ${
+            location.pathname === "/budgeting" ? "active" : ""
+          }`}
           style={{
-            color: location.pathname === "/pricing" ? "#00c46a" : "white",
+            color: location.pathname === "/budgeting" ? "#00c46a" : "white",
           }}
         >
-          PRICING
-        </Link>
-        <Link
-          to="/product"
-          className="product"
-          style={{
-            color: location.pathname === "/product" ? "#00c46a" : "white",
-          }}
-        >
-          PRODUCT
+          BUDGET
         </Link>
         <Button to={login ? "/cities" : "/login"} name="LOGIN" />
       </div>

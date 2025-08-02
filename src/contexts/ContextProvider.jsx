@@ -41,6 +41,10 @@ function reducer(state, action) {
             countryCode: state.currentSelection.countryCode,
             note: action.note,
             date: action.date,
+            budget: null,
+            description: "",
+            image: "",
+            budgetItems: [],
           },
         ],
         currentSelection: {
@@ -74,6 +78,47 @@ function reducer(state, action) {
         // email: null,
         // password: null,
         login: false,
+      };
+    case "save":
+      return {
+        ...state,
+        locationInfo: state.locationInfo.map((item, index) =>
+          index === action.index
+            ? {
+                ...item,
+                budget: action.budget,
+                description: action.description,
+                image: action.image,
+                budgetItems: action.budgetItems,
+              }
+            : item
+        ),
+      };
+    case "add_item":
+      return {
+        ...state,
+        locationInfo: state.locationInfo.map((item, index) =>
+          index === action.index
+            ? {
+                ...item,
+                budgetItems: [...item.budgetItems, action.budgetItems],
+              }
+            : item
+        ),
+      };
+    case "delete_item":
+      return {
+        ...state,
+        locationInfo: state.locationInfo.map((item, index) =>
+          index === action.index
+            ? {
+                ...item,
+                budgetItems: item.budgetItems.filter(
+                  (_, idx) => idx !== action.i_index
+                ),
+              }
+            : item
+        ),
       };
   }
 }

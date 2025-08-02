@@ -94,7 +94,7 @@ export default function MarkedCity() {
                       onClick={() => {
                         dispatch({ type: "remove", index: index });
                       }}
-                      className="btn"
+                      className="btnn"
                     >
                       &times;
                     </button>
