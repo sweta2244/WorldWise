@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { Save, X, Edit, Plus, Trash2 } from "lucide-react";
-import NavBar from "../components/NavBar";
+import NavBar from "../Components/NavBar";
 import { useWorldWise } from "../contexts/useWorldWise";
 
 export default function CityDetailPage() {

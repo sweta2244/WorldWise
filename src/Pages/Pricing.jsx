@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom"
 import { ArrowRight, Plus, Edit, Trash2 } from "lucide-react"
-import NavBar from "../components/NavBar"
+import NavBar from "../Components/NavBar";
 import { useWorldWise } from "../contexts/useWorldWise";
 
 
